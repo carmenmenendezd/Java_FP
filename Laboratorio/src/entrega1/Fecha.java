@@ -1,6 +1,6 @@
 package entrega1;
 
-public record Fecha (Integer año, Integer mes, Integer dia)implements Comparable<Fecha>  {
+public record Fecha (Integer año, Integer mes, Integer dia) {
 
 
     public String nombreMes() {
@@ -10,8 +10,8 @@ public record Fecha (Integer año, Integer mes, Integer dia)implements Comparabl
 
     public String diaSemana() {
         String[] dias = {"Sábado", "Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes"};
-        int h = zeller(dia, mes, año);
-        return dias[h];
+        Integer s = zeller(dia, mes, año);
+        return dias[s];
     }
 
 
@@ -52,6 +52,7 @@ public record Fecha (Integer año, Integer mes, Integer dia)implements Comparabl
                     mes=12;
                     año--;
                 }
+                dia = diasEnMes(año, mes);
             } else {
                 dia-=ndias;
                 ndias=0;
@@ -60,39 +61,34 @@ public record Fecha (Integer año, Integer mes, Integer dia)implements Comparabl
         return new Fecha(año, mes, dia);
     }
     
-    @Override
-    public int compareTo(Fecha otraFecha) {
-        if (this.año != otraFecha.año) {
-            return Integer.compare(this.año, otraFecha.año);
-        } else if (this.mes != otraFecha.mes) {
-            return Integer.compare(this.mes, otraFecha.mes);
-        } else {
-            return Integer.compare(this.dia, otraFecha.dia);
-        }
-    }
-    public int diferenciaEnDias(Fecha otraFecha) {
-        Integer d=null;
-        Integer difdias=0;
-        Fecha menor=null;
-        Fecha mayor=null;
-
-        if (this.equals(otraFecha)) {
-            return 0;
-        } else if (this.compareTo(otraFecha)>0) {
-            d=1;
-            menor=otraFecha;
+    
+    public Integer diferenciaEnDias(Fecha f) {
+    	Integer d;
+    	Fecha menor;
+    	Fecha mayor;
+    	int difdias = 0;
+    	if (this==f) {
+    		return 0;
+    	}
+    	
+        if (this.año() > f.año() ||
+            (this.año().equals(f.año()) && this.mes() > f.mes()) ||
+            (this.año().equals(f.año()) && this.mes().equals(f.mes()) && this.dia() > f.dia())) {
+            d = -1;
+            menor=f;
             mayor=this;
         } else {
-            d=-1;
+            d = 1;
             menor=this;
-            mayor=otraFecha;
+            mayor=f;
         }
-        while (!menor.equals(mayor)) {
+       
+    	while (!menor.equals(mayor)) {
             menor = menor.sumarDias(1);
             difdias++;
         }
-        return d * difdias;
-    }
+    	return d*difdias;
+    	}
     //Representacion cadena 
     
     @Override
@@ -145,6 +141,33 @@ public record Fecha (Integer año, Integer mes, Integer dia)implements Comparabl
             return 31; 
         }
     }
-    
+    public static Fecha restarDiasFechadada(Fecha fecha, Integer numDias) {
+        int dia=fecha.dia;
+        int mes=fecha.mes;
+        int año=fecha.año;
+        if (numDias > 999) {
+            throw new IllegalArgumentException("numDias debe tener 3 cifras como máximo");
+        }
+        if (numDias < 1) {
+            throw new IllegalArgumentException("numDias debe ser positivo");
+        }
+        while (numDias > 0) {
+            int diasMes=diasEnMes(año, mes);
+            if (numDias>=dia) {
+                numDias-=dia;
+                dia=diasMes;
+                mes--;
+                if (mes<1) {
+                    mes=12;
+                    año--;
+                }
+                dia = diasEnMes(año, mes);
+            } else {
+                dia-=numDias;
+                numDias=0;
+            }
+        }
+        return new Fecha(año, mes, dia);
+    }
 
 }

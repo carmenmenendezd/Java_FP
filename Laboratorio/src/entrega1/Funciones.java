@@ -80,6 +80,57 @@ public class Funciones {
 
 	      return masLarga;
 	  }
+//Defensa 
+	 //Apartado A
+	 public static Integer P2(int n, int k, int i) {
+		 if (!(i<k+1)) {
+	            throw new IllegalArgumentException("i debe ser menor que k+1");
+	        }
+	     int productorio = 1;
+	     for (int j=i; j<=k-2;j++) {
+	    	 productorio*=(n-j); 
+	    }
+	    return productorio;
+	 }
+	 //Apartado B
+	 public static double C2(Integer n, Integer k) {
+	        if (!(n > k)) {
+	            throw new IllegalArgumentException("n debe ser mayor que k");
+	        }
+	        if (k<0 || n<0) {
+				throw new IllegalArgumentException("ambos numeros deben ser natural");
+			}
+	        return (double) factorial(n) / (factorial(k + 1) * factorial(n - (k + 1)));
+	    }
+	 	//Apartado C
+	    public static double S2(int n, int k) {
+	        if (!(n>=k)) {
+	            throw new IllegalArgumentException("n debe ser mayor o igual que k");
+	        }
+	        int sumatorio2=0;
+	        int kMasDos = k+2;
+	        for (int i = 0; i <= k; i++) {
+	            sumatorio2 += Math.pow(-1, i)*combinatorio(k, i)*Math.pow((k - i), n);
+	        }
+	        if (k==0) {
+	            k=1;
+	        } else {
+	            for (int i = 1; i < k; i++) {
+	                k *= i;
+	            }
+	        }
+	        if (k == -2) {
+	            kMasDos = 1;
+	        } else {
+	            for (int i = 1; i < k; i++) {
+	                kMasDos *= i;
+	            }
+	        }
+	        double S2 = ((double) k / kMasDos) * sumatorio2;
+	        return S2;
+	    }
+
 	    
+ 
 
 }
