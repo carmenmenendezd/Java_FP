@@ -6,6 +6,7 @@ import java.util.List;
 
 public class TestDataFrame {
 
+
 	public static void main(String[] args) {
 		DataFrame d = DataFrame.parse("src/dataframe/personas.csv",List.of("Id","Nombre","Apellidos","Altura","Fecha_Nacimiento"));
 		System.out.println(d);
