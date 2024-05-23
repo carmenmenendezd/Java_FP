@@ -63,35 +63,33 @@ public class Questions {
 	}
 	
 	public static void main(String[] args) {
-        // Crear un objeto Banco (reemplazar con la lógica de creación adecuada)
 		Banco banco = Banco.of();
 
-        // Test para vencimientoDePrestamosDeCliente
+       
         System.out.println("Vencimientos de préstamos para un cliente:");
         Set<LocalDate> vencimientos = Questions.vencimientoDePrestamosDeCliente(banco, "50000187G");
         System.out.println(vencimientos);
 
-        // Test para clienteConMasPrestamos
         System.out.println("Cliente con más préstamos:");
         Persona clienteMasPrestamos = Questions.clienteConMasPrestamos(banco);
         System.out.println(clienteMasPrestamos);
 
-        // Test para cantidadPrestamosPmpledado
+   
         System.out.println("Cantidad total de préstamos gestionados por un empleado:");
         Double cantidadPrestamos = Questions.cantidadPrestamosPmpledado(banco, "34759012D");
         System.out.println(cantidadPrestamos);
 
-        // Test para empleadoMasLongevo
+   
         System.out.println("Empleado más longevo:");
         Persona empleadoMasLongevo = Questions.empleadoMasLongevo(banco);
         System.out.println(empleadoMasLongevo);
 
-        // Test para rangoDeIntereseDePrestamos
+
         System.out.println("Rango de intereses de préstamos:");
         Questions.Info rangoIntereses = Questions.rangoDeIntereseDePrestamos(banco);
         System.out.println(rangoIntereses);
 
-        // Test para numPrestamosPorMesAño
+      
         System.out.println("Número de préstamos por mes y año:");
         Map<Questions.Info2, Integer> numPrestamosPorMesAno = Questions.numPrestamosPorMesAño(banco);
         System.out.println(numPrestamosPorMesAno);
