@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Laboratorio</name>
+	<name>GestionBanco</name>
 	<comment></comment>
 	<projects>
-		<project>Java_v1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
