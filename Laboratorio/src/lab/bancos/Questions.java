@@ -1,8 +1,13 @@
 package lab.bancos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import us.lsi.ejemplos_b1_tipos.Persona;
@@ -62,6 +67,8 @@ public class Questions {
                 .collect(Collectors.groupingBy(prestamo -> new Info2(prestamo.fechaComienzo().getMonthValue(), prestamo.fechaComienzo().getYear()), Collectors.summingInt(p -> 1)));
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		Banco banco = Banco.of();
 
@@ -93,5 +100,6 @@ public class Questions {
         System.out.println("Número de préstamos por mes y año:");
         Map<Questions.Info2, Integer> numPrestamosPorMesAno = Questions.numPrestamosPorMesAño(banco);
         System.out.println(numPrestamosPorMesAno);
-    }
+        
+	}
 }
